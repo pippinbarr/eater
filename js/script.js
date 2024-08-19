@@ -6,29 +6,26 @@
 
 "use strict";
 
-let level = sunnyDay;
+let level = undefined;
 
 let moveSFX;
 let collectSFX;
+
+let instructions;
 
 function preload() {
     moveSFX = loadSound("assets/sounds/move.wav");
     collectSFX = loadSound("assets/sounds/collect.wav")
 }
 
-/**
- * OH LOOK I DIDN'T DESCRIBE SETUP!!
-*/
 function setup() {
-    createCanvas();
+    let canvas = createCanvas(400, 400);
+    instructions = createP();
 
+    level = new SunnyDay();
     level.setup();
 }
 
-
-/**
- * OOPS I DIDN'T DESCRIBE WHAT MY DRAW DOES!
-*/
 function draw() {
     level.draw();
 }
