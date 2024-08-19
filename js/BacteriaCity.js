@@ -111,6 +111,10 @@ class BacteriaCity {
             this.player.x += cos(this.player.angle) * this.player.speed;
             this.player.y += sin(this.player.angle) * this.player.speed;
             this.player.health -= 0.1;
+            if (this.player.health <= 0) {
+                level = new DeadCity();
+                level.setup();
+            }
             moved = true;
         }
 
