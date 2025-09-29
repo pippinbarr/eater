@@ -28,6 +28,8 @@ class BacteriaCity {
         };
 
         this.instructions = "LEFT/RIGHT to TURN / UP to MOVE / EAT to LIVE / TOUCH to CHAT";
+
+        this.setup();
     }
 
     setup() {
@@ -113,7 +115,6 @@ class BacteriaCity {
             this.player.health -= 0.1;
             if (this.player.health <= 0) {
                 level = new DeadCity();
-                level.setup();
             }
             moved = true;
         }

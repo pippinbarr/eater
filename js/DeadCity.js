@@ -10,7 +10,27 @@ class DeadCity {
         this.backgroundColour = "#aaaaaa";
 
         this.player = undefined;
-        this.playerSymbols = ["👹", "🐕", "🐈", "🐈‍⬛", "🦖", "🦕"];
+        this.playerSymbols = ["👹", "🐕", "🐈", "🐈‍⬛", "🦖", "🦕", "🕷️", "🦅", "🦇", "🪲", "🐍", "🪱", "🦀", "🦢", "🦚"];
+
+        this.inscriptions = [
+            "MORO",
+            "REST IN PIECES",
+            "6898",
+            "HE WAS A GOOD DOG",
+            "DAD",
+            "SORRY ABOUT THAT",
+            "TELEPHONE",
+            "SHE FINALLY HUNG IT UP",
+            "HMMM?",
+            "WE GOT THE LAST LAUGH",
+            "GOGO",
+            "IT HAPPENED AT THE DISCO",
+            "I NEED TO DO THIS",
+            "NO RETURNS",
+            "YOYO",
+            "HERE LIES FELIX",
+            "CALL ME"
+        ];
 
         this.world = [
             [" ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " ", " "],
@@ -37,6 +57,8 @@ class DeadCity {
         this.rows = this.world.length;
 
         this.instructions = "ARROW KEYS to MOVE / HIT to FIGHT";
+
+        this.setup();
     }
 
     setup() {
@@ -67,13 +89,14 @@ class DeadCity {
         };
         switch (symbol) {
             case "🪦":
-                cellData.inscription = "TOTO";
+                cellData.inscription = random(this.inscriptions);
                 break;
             case "👹":
                 this.player = {
                     symbol: symbol,
                     row: row,
-                    col: col
+                    col: col,
+                    health: 255
                 };
         };
         return cellData;
@@ -110,6 +133,10 @@ class DeadCity {
                 push();
                 textAlign(CENTER, CENTER);
                 textSize(this.tileSize);
+                // Player fades away with health
+                if (cell.symbol === this.player.symbol) {
+                    fill(255, this.player.health);
+                }
                 text(cell.symbol, x + this.tileSize / 8, y + this.tileSize / 20);
                 pop();
             }
@@ -174,6 +201,11 @@ class DeadCity {
                 return;
             }
 
+            this.player.health -= 10;
+            if (this.player.health <= 0) {
+                level = new Hell();
+            }
+
             switch (target.symbol) {
                 // Standard move
                 case " ":
@@ -190,6 +222,7 @@ class DeadCity {
                 default:
                     // Must be a monster
                     this.set(newR, newC, " ");
+                    this.player.health = constrain(this.player.health + 50, 0, 255);
                     // this.set(this.player.row, this.player.col, " ");
                     // this.player.col = newC;
                     // this.player.row = newR;

@@ -22,8 +22,7 @@ function setup() {
     let canvas = createCanvas(400, 400);
     instructions = createP();
 
-    level = new DeadCity();
-    level.setup();
+    level = new SunnyDay();
 }
 
 function draw() {

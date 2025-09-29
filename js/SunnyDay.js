@@ -24,6 +24,8 @@ class SunnyDay {
         };
 
         this.instructions = "ARROW KEYS to MOVE / EAT to LIVE";
+
+        this.setup();
     }
 
     setup() {
@@ -101,7 +103,6 @@ class SunnyDay {
 
             if (this.player.size <= 0) {
                 level = new BacteriaCity();
-                level.setup();
             }
         }
     }
